@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+#display{
+	border: 5px solid black;
+	font-family: "Arial";
+	font-size: 300%;
+	color: black;
+	text-align: right;
+	height: 50px;
+	width: 267px;
+	background-color: white;
+}
+table{
+	margin: 10px;
+	border: 2px solid black;
+}
+td{
+	text-align: center;
+	height: 50px;
+	width: 50px;
+}
+input[type=button]{
+	text-align: center;
+	font-size: 200%;
+	border: 1px solid black;
+	border-radius: 10px;
+	background-color: black;
+	color: white;
+	cursor: pointer;
+	height: 100%;
+	width: 100%;
+}
+input[type=button]:hover{
+	font-size: 200%;
+	border: 1px solid black;
+	border-radius: 10px;
+	background-color: white;
+	color: black;
+	cursor: pointer;
+	height: 100%;
+	width: 100%;
+}
+input[type=button]:active{
+	font-size: 200%;
+	border: 2px solid black;
+	border-radius: 10px;
+	background-color: white;
+	color: black;
+	cursor: pointer;
+	height: 100%;
+	width: 100%;
+}
+</style>
+</head>
+<body>
+
+<form name="calculator">
+
+<table>
+	<tr>
+		<td colspan = "5">
+		<input type="text" id="display" disabled>
+		</td>
+	</tr>
+	<tr>
+		<td><input type= "button" value= "7" onclick= val("7")></td>
+		<td><input type= "button" value= "8" onclick= val("8")></td>
+		<td><input type= "button" value= "9" onclick= val("9")></td>
+		<td colspan= "2"><input type= "button" value= "C" onclick= val("c")></td>
+	</tr>
+	<tr>
+		<td><input type= "button" value= "4" onclick= val("4")></td>
+		<td><input type= "button" value= "5" onclick= val("5")></td>
+		<td><input type= "button" value= "6" onclick= val("6")></td>
+		<td><input type= "button" value= "x" onclick= val("x")></td>
+		<td><input type= "button" value= "%" onclick= val("%")></td>
+	</tr>
+	<tr>
+		<td><input type= "button" value= "1" onclick= val("1")></td>
+		<td><input type= "button" value= "2" onclick= val("2")></td>
+		<td><input type= "button" value= "3" onclick= val("3")></td>
+		<td><input type= "button" value= "+" onclick= val("+")></td>
+		<td><input type= "button" value= "-" onclick= val("-")></td>
+	</tr>
+		<td><input type= "button" value= "." onclick= val(".")></td>
+		<td><input type= "button" value= "0" onclick= val("0")></td>
+		<td colspan= "3"><input type= "button" value= "=" onclick= val("=")></td>
+</table>
+</form>
+<script>
+
+let result1 = 0;
+let mem1 = 0;
+let first_val = "";
+let second_val = "";
+let num1 = 0;
+let num2 = 0;
+let operator;
+
+function val(buttons_values){
+	if (buttons_values == "c"){
+	document.getElementById("display").value = "";
+	first_val = "";
+	second_val = "";
+	mem1 = 0;
+	operator = "";
+	}
+
+	if (mem1 == 0 && buttons_values != "c" && buttons_values != "x" && buttons_values != "%" 
+	&& buttons_values != "+" && buttons_values != "-" && buttons_values != "="){
+		first_val = first_val + buttons_values;
+		document.getElementById("display").value = first_val;
+		}
+		
+	if (buttons_values == "x" || buttons_values == "%" || buttons_values == "+" || buttons_values == "-"){
+		mem1 = 1;
+		operator = buttons_values;
+		document.getElementById("display").value = buttons_values;
+		}
+
+	if (mem1 == 1 && buttons_values != "c" && buttons_values != "x" && buttons_values != "%" 
+	&& buttons_values != "+" && buttons_values != "-" && buttons_values != "="){
+		second_val = second_val + buttons_values;
+		document.getElementById("display").value = second_val;
+	}
+
+	if (buttons_values == "="){
+	num1 = Number(first_val);
+	num2 = Number(second_val);
+		if (operator == "x"){
+			result1 = num1 * num2;}
+		if (operator == "%"){
+			result1 = num1 / num2;}
+		if (operator == "+"){
+			result1 = num1 + num2;}
+		if (operator == "-"){
+			result1 = num1 - num2;}			
+	document.getElementById("display").value = result1;
+	first_val = result1;
+	second_val = "";
+	mem1 = 0;
+	}
+}
+</script>
+</body>
+</html>
